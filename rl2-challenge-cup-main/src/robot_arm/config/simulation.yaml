@@ -1,0 +1,30 @@
+schema_version: 1
+
+model: mjcf/scenes/arx_x5_contact_grasp.xml
+command_rate_hz: 50.0
+realtime: false
+
+joint_names: [joint1, joint2, joint3, joint4, joint5, joint6]
+actuator_names:
+  - arx_x5_joint1_position
+  - arx_x5_joint2_position
+  - arx_x5_joint3_position
+  - arx_x5_joint4_position
+  - arx_x5_joint5_position
+  - arx_x5_joint6_position
+gripper_actuator: arx_x5_gripper_position
+
+home_joints: [0.0, 0.645, 1.040, -0.770, 0.0, 0.0]
+search_joints: [0.0, 0.645, 1.040, -0.770, 0.0, 0.0]
+gripper_open: 0.088
+target_position_m: [0.30, 0.0, 0.3046]
+place_position_m: [0.25, 0.30, 0.305]
+
+verification:
+  target_body: contact_target
+  target_geom: contact_target_geom
+  left_gripper_geoms: [arx_x5_gripper_fixed_finger, arx_x5_gripper_fixed_pad]
+  right_gripper_geoms: [arx_x5_gripper_moving_finger_geom, arx_x5_gripper_moving_pad]
+  storage_region_site: storage_hold_region
+  minimum_lift_m: 0.04
+  open_settle_steps: 100

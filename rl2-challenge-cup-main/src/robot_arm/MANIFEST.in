@@ -1,0 +1,6 @@
+include tools/tune_joint_limits.py
+recursive-include config *.yaml *.json
+recursive-include mjcf *.xml
+recursive-include meshes *.obj LICENSE
+recursive-include models *.pt *.onnx *.json
+recursive-include tests *.py

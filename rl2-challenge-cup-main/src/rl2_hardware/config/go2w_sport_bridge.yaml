@@ -1,0 +1,23 @@
+go2w_sport_cmd_bridge:
+  ros__parameters:
+    input_topic: /cmd_vel_sport
+    request_topic: /api/sport/request
+    response_topic: /api/sport/response
+    sport_state_topic: /lf/sportmodestate
+    status_topic: /go2w_sport_cmd_bridge/status
+    publish_rate_hz: 10.0
+    input_timeout_sec: 0.30
+    sport_state_timeout_sec: 0.50
+    max_linear_x: 0.40
+    max_linear_y: 0.50
+    # Match Nav2's controller/smoother limit. 0.50 rad/s is the current
+    # fast-navigation setting; validate it in an open area before a mission.
+    max_angular_z: 0.50
+    allow_reverse: false
+    zero_epsilon: 0.001
+    stop_heartbeat_sec: 0.50
+    stop_repeat_count: 3
+    stand_down_exclusive_sec: 3.0
+    stand_up_exclusive_sec: 4.0
+    balance_stand_exclusive_sec: 2.0
+    enabled_on_start: false

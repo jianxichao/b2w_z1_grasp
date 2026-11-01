@@ -1,0 +1,38 @@
+schema_version: 1
+
+home_joints: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+search_joints: [0.0, 0.645, 1.040, -0.770, 0.0, 0.0]
+
+gripper:
+  open_m: 0.088
+  closed_m: 0.0
+
+planning:
+  pregrasp_offset_m: 0.08
+  lift_offset_m: 0.08
+  transit_height_m: 0.40
+  # Robot/arm frame: +x forward, +y left.  Release 0.07 m farther back than
+  # the prior test, 0.04 m farther out/left, and at a 0.20 m height.
+  place_position_m: [0.02, 0.14, 0.18]
+  place_clearance_m: 0.05
+
+durations_s:
+  home: 2.0
+  search: 2.0
+  pregrasp: 2.0
+  grasp: 1.5
+  close: 0.65
+  lift: 1.5
+  transit: 2.0
+  place: 2.5
+  open: 0.65
+  retreat: 2.0
+
+pose_policy:
+  base_roll_rad: 0.0
+  base_pitch_rad: 0.375
+  dive_start_z_m: 0.25
+  minimum_z_m: 0.05
+  dive_gain_rad: 1.0
+  pitch_min_rad: 0.20
+  pitch_max_rad: 1.55

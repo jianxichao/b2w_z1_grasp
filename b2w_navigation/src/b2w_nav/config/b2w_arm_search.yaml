@@ -1,0 +1,83 @@
+# Stage 1 raised-arm candidate clearances.
+b2w_preflight:
+  ros__parameters:
+    geometry_verified: true
+    camera_extrinsics_verified: false
+    network_interface: eno1
+    geometry_source: official_b2w_nominal_1.098x0.550m_plus_padding
+yolo_target_perception_node:
+  ros__parameters:
+    camera_extrinsics_verified: false
+    camera_to_base_x: 0.0
+    camera_to_base_y: 0.0
+    camera_to_base_z: 0.0
+    camera_roll_offset_deg: 0.0
+    camera_pitch_offset_deg: 0.0
+    camera_yaw_offset_deg: 0.0
+    max_distance_m: 3.0
+    max_confirm_distance_m: 3.0
+    rgb_depth_sync_use_receive_time: false
+mapping_cloud_to_scan:
+  ros__parameters:
+    min_height: -0.25
+    max_height: 0.6
+official_occupancy_grid_bridge:
+  ros__parameters:
+    min_height_m: -0.3
+    max_height_m: 1.2
+    ground_min_height_m: -0.65
+    ground_max_height_m: -0.32
+    ground_free_enabled: false
+    footprint_half_length_m: 0.2
+    footprint_half_width_m: 0.15
+frontier_explorer_node:
+  ros__parameters:
+    goal_safety_radius_m: 1.3
+    global_costmap_goal_clearance_m: 1.0
+    path_clearance_m: 1.0
+mission_supervisor_node:
+  ros__parameters:
+    approach_standoff_m: 1.0
+    approach_safety_radius_m: 0.8
+    approach_arrival_tolerance_m: 0.15
+    approach_arrival_max_distance_m: 1.15
+    approach_topup_standoff_m: 1.0
+b2w_lidar_mount:
+  ros__parameters:
+    verified: true
+    parent_frame: base_link
+    frame_id: rslidar
+    x: 0.34218
+    y: 0.0
+    z: 0.17851
+    roll: 0.0
+    pitch: 0.0
+    yaw: 0.0
+    source: unitreerobotics/unitree_ros robots/b2w_description/urdf/b2w_description.urdf
+      joint_lidar
+b2w_front_depth_mount:
+  ros__parameters:
+    verified: true
+    parent_frame: base_link
+    frame_id: f_dc_link
+    x: 0.42161
+    y: 0.025
+    z: 0.061851
+    roll: -2.3562
+    pitch: 0.0
+    yaw: -1.5708
+    source: unitreerobotics/unitree_ros robots/b2w_description/urdf/b2w_description.urdf
+      joint_f_dc
+b2w_rear_depth_mount:
+  ros__parameters:
+    verified: true
+    parent_frame: base_link
+    frame_id: r_dc_link
+    x: -0.42244
+    y: -0.025
+    z: 0.038026
+    roll: -2.3562
+    pitch: 0.0
+    yaw: 1.5708
+    source: unitreerobotics/unitree_ros robots/b2w_description/urdf/b2w_description.urdf
+      joint_r_dc

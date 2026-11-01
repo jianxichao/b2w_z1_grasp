@@ -1,0 +1,151 @@
+{
+  "model": "../../sponge_best.pt",
+  "class_name": "sponge",
+  "camera": {
+    "host": "192.168.123.164",
+    "user": "unitree",
+    "serial": "244222076021",
+    "password": "Unitree0408"
+  },
+  "grasp_config": "../../unitree_z1/yolo/grasp_demo/config.json",
+  "wrist": {
+    "joint": 5,
+    "amplitude_deg": 15.0,
+    "speed_rad_s": 0.09,
+    "startup_position_window_sec": 0.6,
+    "startup_position_range_rad": 0.003,
+    "startup_still_timeout_sec": 3.0,
+    "startup_gripper_reset": true
+  },
+  "confidence": 0.65,
+  "max_search_sec": 180.0,
+  "frame_timeout_sec": 2.0,
+  "max_capture_sec": 1.5,
+  "depth": {
+    "min_m": 0.15,
+    "max_m": 3.0,
+    "roi_fraction": 0.35,
+    "min_pixels": 20,
+    "min_valid_fraction": 0.5,
+    "max_spread_m": 0.05
+  },
+  "observation": {
+    "enabled": true,
+    "target_end_xyz_m": [
+      0.2,
+      0.0,
+      0.3
+    ],
+    "search_radius_m": 0.04,
+    "pitch_candidates_deg": [
+      15.0,
+      5.0,
+      25.0,
+      0.0,
+      -10.0
+    ],
+    "joint_speed_rad_s": 0.1,
+    "settle_timeout_sec": 10.0,
+    "joint_position_tolerance_rad": 0.08,
+    "joint_speed_tolerance_rad_s": 0.06,
+    "settle_stable_sec": 0.3,
+    "settle_position_window_sec": 0.6,
+    "settle_position_range_rad": 0.003
+  },
+  "reset": {
+    "target_q_rad": [
+      0.0,
+      0.0,
+      -0.005,
+      -0.074,
+      0.0,
+      0.0
+    ],
+    "source": "unitree_z1/z1_controller/config/savedArmStates.csv:startFlat",
+    "label": "退出复位",
+    "log_prefix": "exit_reset",
+    "joint_speed_rad_s": 0.08,
+    "settle_timeout_sec": 15.0,
+    "joint_position_tolerance_rad": 0.08,
+    "joint_speed_tolerance_rad_s": 0.06,
+    "settle_stable_sec": 0.3,
+    "settle_position_window_sec": 0.6,
+    "settle_position_range_rad": 0.003
+  },
+  "approach": {
+    "base_frame": "base_link",
+    "map_frame": "map",
+    "T_base_arm": [
+      [
+        1,
+        0,
+        0,
+        0.078
+      ],
+      [
+        0,
+        1,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        1,
+        0.09602
+      ],
+      [
+        0,
+        0,
+        0,
+        1
+      ]
+    ],
+    "standoff_m": 1.0,
+    "arrival_tolerance_m": 0.2,
+    "timeout_sec": 90.0,
+    "max_target_distance_m": 5.0,
+    "map_timeout_sec": 3.0,
+    "tf_timeout_sec": 0.5,
+    "depth_wait_timeout_sec": 10.0,
+    "tf_lookup_wait_sec": 0.3,
+    "backend": "sport_velocity_goal",
+    "side": "left",
+    "side_offset_m": 1.2,
+    "sport_max_distance_m": 3.5,
+    "stand_down_forward_compensation_m": 0.07
+  },
+  "vote_window_frames": 3,
+  "vote_required_frames": 2,
+  "post_grasp": {
+    "side_offset_m": 0.5,
+    "max_search_sec": 240.0,
+    "view_radius_m": 0.2,
+    "view_height_m": 0.3,
+    "scan_amplitude_deg": 6.0,
+    "scan_speed_rad_s": 0.12,
+    "joint_speed_rad_s": 0.1,
+    "gripper_speed_rad_s": 0.5,
+    "gripper_timeout_sec": 8.5,
+    "depth_wait_timeout_sec": 8.0,
+    "turn_speed_rad_s": 0.2,
+    "turn_joint_position_tolerance_rad": 0.08,
+    "turn_joint_speed_tolerance_rad_s": 0.1,
+    "turn_settle_stable_sec": 0.2,
+    "turn_settle_position_window_sec": 0.3,
+    "turn_settle_position_range_rad": 0.005,
+    "gripper_open_wait_sec": 0.5,
+    "joint_position_tolerance_rad": 0.08,
+    "visual_servo": {
+      "enabled": true,
+      "step_m": 0.03,
+      "max_joint_step_rad": 0.2,
+      "max_correction_m": 0.02,
+      "association_distance_m": 0.08,
+      "final_blind_distance_m": 0.03,
+      "max_steps": 60,
+      "max_duration_sec": 180.0,
+      "use_ground_projection": true
+    }
+  }
+}

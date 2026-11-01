@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Include inside the parent model's top-level <actuator> element. -->
+<mujoco>
+  <position name="arx_x5_joint1_position" joint="joint1" kp="120"
+            ctrllimited="true" ctrlrange="-1.581 1.581"
+            forcelimited="true" forcerange="-45 45"/>
+  <position name="arx_x5_joint2_position" joint="joint2" kp="150"
+            ctrllimited="true" ctrlrange="0 2.101"
+            forcelimited="true" forcerange="-60 60"/>
+  <position name="arx_x5_joint3_position" joint="joint3" kp="120"
+            ctrllimited="true" ctrlrange="-1.57 1.57"
+            forcelimited="true" forcerange="-45 45"/>
+  <position name="arx_x5_joint4_position" joint="joint4" kp="80"
+            ctrllimited="true" ctrlrange="-1.30 1.30"
+            forcelimited="true" forcerange="-25 25"/>
+  <position name="arx_x5_joint5_position" joint="joint5" kp="60"
+            ctrllimited="true" ctrlrange="-1.57 1.57"
+            forcelimited="true" forcerange="-18 18"/>
+  <position name="arx_x5_joint6_position" joint="joint6" kp="45"
+            ctrllimited="true" ctrlrange="-2.10 2.10"
+            forcelimited="true" forcerange="-12 12"/>
+  <!-- gear=2 maps the measured 0..90 mm total-gap command to the
+       right jaw's 0..45 mm joint travel; equality mirrors the left jaw. -->
+  <position name="arx_x5_gripper_position" joint="gripper_opening" gear="2" kp="100"
+            ctrllimited="true" ctrlrange="0 0.09"
+            forcelimited="true" forcerange="-15 15"/>
+</mujoco>

@@ -1,0 +1,83 @@
+classes:
+  - name: science_target
+    id: 0
+    min_confidence: 0.35
+    expected_size_m: 0.12
+    note: "First-stage placeholder target."
+  - name: rock_obstacle
+    id: 1
+    min_confidence: 0.35
+    note: "Optional navigation landmark or obstacle class."
+  - name: base_marker
+    id: 2
+    min_confidence: 0.35
+    note: "Optional return-to-base visual marker."
+  - name: drop_zone
+    id: 3
+    min_confidence: 0.35
+    note: "Optional unloading zone marker."
+  - name: unknown
+    id: 4
+    min_confidence: 0.25
+    note: "Fallback class for unmapped detector output."
+
+# Project class names accepted by the offline detector JSON contract.
+target_classes:
+  - science_target
+  - rock_obstacle
+  - base_marker
+  - drop_zone
+  - unknown
+
+# Temporary mapping for COCO-pretrained YOLO demos only. It is disabled unless
+# the offline CLI is invoked with --enable-demo-mapping.
+demo_mapping:
+  enabled: false
+  class_map:
+    bottle: science_target
+    cup: science_target
+    laptop: science_target
+
+runtime:
+  detector_mode: yolo
+  publish_rate_hz: 1.0
+  frame_id: camera_color_optical_frame
+  target_candidates_topic: /target_candidates
+  task_event_topic: /task_event
+  perception_event_detail_topic: /perception_event_detail
+  task_state_topic: /task_state
+  fake_no_detection: false
+  yolo_model_path: E:/Desktop/yolo_train/runs/detect/train/weights/best.pt
+  yolo_confidence_threshold: 0.35
+  yolo_class_mapping: yellow_cube:science_target
+  yolo_device: cpu
+
+preprocess:
+  enabled: true
+  output_width: 640
+  output_height: 480
+  mode: auto
+  letterbox_value: 114
+
+detection:
+  post_mapping_nms_enabled: true
+  post_mapping_nms_iou: 0.70
+
+event_policy:
+  target_class: science_target
+  acquire_confidence: 0.5
+  maintain_confidence: 0.25
+  seen_confirm_frames: 2
+  seen_confirm_s: 0.10
+  lost_confirm_frames: 3
+  lost_confirm_s: 0.50
+  lost_timeout_s: 3.0
+
+confidence_threshold:
+  default: 0.5
+  low_confidence_demo: 0.25
+
+json_output_contract:
+  frame_id: camera_color_optical_frame
+  message_type: Detection2D
+  no_detection: []

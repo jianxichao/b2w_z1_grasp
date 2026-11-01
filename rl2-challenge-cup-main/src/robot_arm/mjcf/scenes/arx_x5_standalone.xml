@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mujoco model="arx_x5_standalone">
+  <include file="../robot/arx_x5_assets.xml"/>
+  <compiler angle="radian" autolimits="false"/>
+  <option timestep="0.002" gravity="0 0 -1.62" integrator="implicitfast"/>
+
+  <visual>
+    <headlight ambient="0.35 0.35 0.35" diffuse="0.75 0.75 0.75"/>
+    <rgba haze="0.08 0.08 0.10 1"/>
+  </visual>
+
+  <default>
+    <default class="arx_x5_visual">
+      <geom contype="1" conaffinity="1" friction="0.8 0.02 0.002"/>
+    </default>
+  </default>
+
+  <worldbody>
+    <light pos="0 -1.5 2.5" dir="0 0 -1" directional="true"/>
+    <geom name="floor" type="plane" size="2 2 0.05" rgba="0.32 0.31 0.30 1"/>
+    <body name="stand" pos="0 0 0.015">
+      <!-- Thin engineering mount: the Go2 back plate position is set by assembly. -->
+      <geom name="arx_x5_mounting_plate" type="box" size="0.12 0.08 0.015"
+            mass="8" rgba="0.12 0.14 0.17 1"/>
+      <include file="../robot/arx_x5_body.xml"/>
+    </body>
+  </worldbody>
+
+  <actuator>
+    <include file="../robot/arx_x5_actuators.xml"/>
+  </actuator>
+
+  <equality>
+    <include file="../robot/arx_x5_equalities.xml"/>
+  </equality>
+
+  <keyframe>
+    <key name="initial" qpos="0 0.645 1.040 -0.770 0 0 0.045 0.045"
+         ctrl="0 0.645 1.040 -0.770 0 0 0.09"/>
+  </keyframe>
+</mujoco>

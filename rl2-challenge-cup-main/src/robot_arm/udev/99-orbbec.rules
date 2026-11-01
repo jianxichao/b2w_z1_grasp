@@ -1,0 +1,9 @@
+# Orbbec Gemini 2 (USB ID 2bc5:0670) — allow non-root access for pyorbbecsdk.
+#
+# Install once:
+#   sudo cp udev/99-orbbec.rules /etc/udev/rules.d/
+#   sudo udevadm control --reload-rules
+#   sudo udevadm trigger
+# Then unplug/replug the camera (or reboot).
+
+SUBSYSTEM=="usb", ATTR{idVendor}=="2bc5", MODE:="0666", GROUP:="plugdev"

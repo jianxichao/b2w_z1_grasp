@@ -1,0 +1,7 @@
+geometry_msgs/PoseStamped pose
+int32 mode
+float32 speed
+---
+bool success
+int64 request_id
+string message

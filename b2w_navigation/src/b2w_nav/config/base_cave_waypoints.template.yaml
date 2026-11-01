@@ -1,0 +1,15 @@
+base_cave_transit_node:
+  ros__parameters:
+    map_frame: map
+    base_valid: true
+    base_x: 0.0
+    base_y: 0.0
+    base_yaw: 0.0
+    cave_a_valid: true
+    cave_a_x: 0.0
+    cave_a_y: 0.0
+    cave_b_valid: true
+    cave_b_x: 0.0
+    cave_b_y: 0.0
+    # Heading at the cave midpoint when entering the cave, in map radians.
+    cave_entry_yaw: 0.0

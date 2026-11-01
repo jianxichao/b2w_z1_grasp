@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  High-fidelity visual assets converted from the BSD-3-Clause FiveAges
+  arx5_description GLB files. Collision remains primitive and independent.
+-->
+<mujoco>
+  <asset>
+    <mesh name="arx_x5_mesh_base" file="../../meshes/arx_x5/base_link.obj"/>
+    <mesh name="arx_x5_mesh_link1" file="../../meshes/arx_x5/link1.obj"/>
+    <mesh name="arx_x5_mesh_link2" file="../../meshes/arx_x5/link2.obj"/>
+    <mesh name="arx_x5_mesh_link3" file="../../meshes/arx_x5/link3.obj"/>
+    <mesh name="arx_x5_mesh_link4" file="../../meshes/arx_x5/link4.obj"/>
+    <mesh name="arx_x5_mesh_link5" file="../../meshes/arx_x5/link5.obj"/>
+    <mesh name="arx_x5_mesh_link6" file="../../meshes/arx_x5/link6.obj"/>
+    <mesh name="arx_x5_mesh_link7" file="../../meshes/arx_x5/link7.obj"/>
+    <mesh name="arx_x5_mesh_link8" file="../../meshes/arx_x5/link8.obj"/>
+    <material name="arx_x5_body_material" rgba="0.72 0.74 0.77 1"/>
+    <material name="arx_x5_gripper_material" rgba="0.12 0.13 0.15 1"/>
+  </asset>
+</mujoco>

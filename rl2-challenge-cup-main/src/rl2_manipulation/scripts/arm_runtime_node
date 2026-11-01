@@ -1,0 +1,8 @@
+#!/usr/bin/env python3
+"""使用当前激活的 Python 环境启动机械臂节点。"""
+
+from rl2_manipulation.arm_action_server import main
+
+
+if __name__ == "__main__":
+    main()

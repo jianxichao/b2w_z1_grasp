@@ -1,0 +1,7 @@
+geometry_msgs/PoseStamped base_pose
+---
+bool success
+string message
+---
+string stage
+float32 distance_remaining

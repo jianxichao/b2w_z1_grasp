@@ -1,0 +1,42 @@
+arm_runtime_node:
+  ros__parameters:
+    robot_config_root: ""
+    action_name: /arm/grasp_target
+    joint_state_topic: /arm/joint_states
+    status_topic: /arm/status
+    target_topic: /arm/target_pose
+    home_service: /arm/home
+    state_rate_hz: 20.0
+
+    base_parent_frame: base_link
+    arm_base_frame: arm_base
+    tcp_frame: arm_tcp
+    camera_frame: camera_color_optical_frame
+
+    # 只有实际测量完底盘到机械臂基座的安装关系后才改为 true。
+    mount_calibrated: false
+    mount_xyz_m: [0.0, 0.0, 0.0]
+    mount_rpy_rad: [0.0, 0.0, 0.0]
+    tf_timeout_s: 0.2
+
+vision_target_node:
+  ros__parameters:
+    robot_config_root: ""
+    candidate_topic: /robot_arm/target_candidate
+    target_topic: /robot_arm/target_pose
+    status_topic: /robot_arm/target_status
+    annotated_image_topic: /robot_arm/annotated/compressed
+    annotated_raw_image_topic: /robot_arm/annotated_image
+    arm_status_topic: /arm/status
+    arm_base_frame: arm_base
+    tcp_frame: arm_tcp
+    # ONNX CPU inference is ~0.4 s/frame on the dock, so 2 Hz avoids backlog.
+    publish_rate_hz: 2.0
+    tf_timeout_s: 0.2
+
+    # robot_arm 当前使用专用 rock_obstacle 权重；不要启用 COCO 演示映射。
+    # 此节点只发布目标，不会自动控制机械臂。
+    demo_mapping: false
+    # The dock normally runs headless. Inspect status/pose topics from the laptop.
+    show: false
+    show_depth: false

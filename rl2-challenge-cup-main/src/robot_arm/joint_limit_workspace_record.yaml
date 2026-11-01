@@ -1,0 +1,52 @@
+schema_version: 1
+warning: 候选标定记录；尚未写入机器人正式配置
+control_mode: direct_mujoco_qpos
+exploration_hard_limit_rad: 6.283185307179586
+slider_resolution_rad: 0.001
+joint_limits:
+  joint1:
+    lower_rad: null
+    upper_rad: null
+    lower_deg: null
+    upper_deg: null
+  joint2:
+    lower_rad: null
+    upper_rad: null
+    lower_deg: null
+    upper_deg: null
+  joint3:
+    lower_rad: null
+    upper_rad: null
+    lower_deg: null
+    upper_deg: null
+  joint4:
+    lower_rad: null
+    upper_rad: null
+    lower_deg: null
+    upper_deg: null
+  joint5:
+    lower_rad: null
+    upper_rad: null
+    lower_deg: null
+    upper_deg: null
+  joint6:
+    lower_rad: null
+    upper_rad: null
+    lower_deg: null
+    upper_deg: null
+workspace_arm_base:
+  sample_count: 0
+  samples: []
+last_pose:
+  joint_pos_rad:
+  - 1.685
+  - 0.562
+  - 3.495
+  - -0.083
+  - 0.042
+  - -0.083
+  tcp_position_arm_base_m:
+  - 0.08592846
+  - -0.68067257
+  - 0.30656881
+  gripper_open: true

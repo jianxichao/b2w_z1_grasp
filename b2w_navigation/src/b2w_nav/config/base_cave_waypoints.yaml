@@ -1,0 +1,16 @@
+base_cave_transit_node:
+  ros__parameters:
+    map_frame: map
+    base_valid: true
+    base_x: -0.9018463769314599
+    base_y: 3.1729447911619566
+    base_yaw: -1.4567911021181614
+    cave_a_valid: true
+    cave_a_x: 2.7441805387036777
+    cave_a_y: -0.01859285018511927
+    cave_b_valid: true
+    cave_b_x: 2.307721166551326
+    cave_b_y: -0.011580012677332387
+    # A-B is almost parallel to map X. The base is on +Y, so entering the
+    # cave points toward -Y (away from base).
+    cave_entry_yaw: -1.5707963267948966

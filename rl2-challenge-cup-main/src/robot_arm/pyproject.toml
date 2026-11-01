@@ -1,0 +1,62 @@
+[build-system]
+requires = ["setuptools>=59.6"]
+build-backend = "setuptools.build_meta:__legacy__"
+
+[project]
+name = "robot_arm"
+version = "0.1.0"
+description = "ARX X5 仿真、真机与 Orbbec YOLO 抓取程序"
+readme = {text = "ARX X5 仿真、真机与 Orbbec YOLO 抓取程序。", content-type = "text/markdown"}
+requires-python = ">=3.8"
+license = {text = "MIT"}
+authors = [{name = "Robot Arm Team", email = "robot-arm-team@users.noreply.github.com"}]
+maintainers = [{name = "Robot Arm Team", email = "robot-arm-team@users.noreply.github.com"}]
+dependencies = [
+  "numpy>=1.21,<2",
+  "PyYAML>=5.4",
+]
+
+[project.urls]
+Repository = "https://github.com/robot-arm-team/robot-arm"
+
+[project.optional-dependencies]
+simulation = ["mujoco>=3.0"]
+vision = ["opencv-python>=4.5", "ultralytics>=8.3"]
+test = ["pytest>=6.2"]
+full = [
+  "mujoco>=3.0",
+  "opencv-python>=4.5",
+  "ultralytics>=8.3",
+  "pytest>=6.2",
+]
+
+[project.scripts]
+robot-arm = "robot_arm.app:main"
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["robot_arm*"]
+
+[tool.setuptools.data-files]
+"share/ament_index/resource_index/packages" = ["resource/robot_arm"]
+"share/robot_arm" = ["package.xml"]
+"share/robot_arm/tools" = ["tools/tune_joint_limits.py"]
+"share/robot_arm/config" = ["config/*.yaml", "config/*.json"]
+"share/robot_arm/mjcf/robot" = ["mjcf/robot/*.xml"]
+"share/robot_arm/mjcf/scenes" = ["mjcf/scenes/*.xml"]
+"share/robot_arm/meshes/arx_x5" = ["meshes/arx_x5/*"]
+"share/robot_arm/models/yolo" = ["models/yolo/*"]
+"share/robot_arm/third_party/arx5_sdk/python" = ["third_party/arx5_sdk/python/arx5_interface*.so"]
+"share/robot_arm/third_party/arx5_sdk/lib/x86_64" = ["third_party/arx5_sdk/lib/x86_64/*.so"]
+"share/robot_arm/third_party/arx5_sdk/models" = ["third_party/arx5_sdk/models/X5.urdf"]
+"share/robot_arm/third_party/arx5_sdk/models/meshes/X5" = ["third_party/arx5_sdk/models/meshes/X5/*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = [
+  "simulation: 需要 MuJoCo 的测试",
+  "hardware: 需要相机或机械臂的人工测试",
+]

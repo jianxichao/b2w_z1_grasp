@@ -1,0 +1,10 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+build/
+dist/
+*.egg-info/
+third_party/arx5_sdk/build/
+yolo*.pt
+tests/hardware/outputs/*.json
+!tests/hardware/outputs/teach_joint_pose.json

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Include inside the parent model's top-level <equality> element. -->
+<mujoco>
+  <joint name="arx_x5_gripper_symmetric_coupling"
+         joint1="gripper_opening_mirror" joint2="gripper_opening"
+         polycoef="0 1 0 0 0"/>
+</mujoco>

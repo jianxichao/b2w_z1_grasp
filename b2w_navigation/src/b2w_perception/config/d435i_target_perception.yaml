@@ -1,0 +1,41 @@
+yolo_target_perception_node:
+  ros__parameters:
+    camera_extrinsics_verified: false
+    confidence_threshold: 0.65
+    candidate_confidence_threshold: 0.30
+    max_confirm_distance_m: 3.0
+    imgsz: 640
+    class_mapping: ""
+    target_class: sponge
+    seen_confirm_frames: 3
+    min_distance_m: 0.15
+    max_distance_m: 3.0
+    pose_smoothing_alpha: 0.35
+    # Prevent one target's EMA track from dragging the next target toward an
+    # in-between ghost coordinate when the camera changes targets directly.
+    pose_smoothing_reset_distance_m: 0.80
+    target_frame: map
+    color_topic: /b2w/front/color/image_raw
+    camera_info_topic: /b2w/front/color/camera_info
+    depth_topic: /b2w/front/aligned_depth_to_color/image_raw
+    odom_topic: /slam/odom
+    pose_topic: /perception/target_pose
+    status_topic: /target_detection_status
+    annotated_image_topic: /perception/annotated_image
+    task_event_topic: /task_event
+    distance_source: depth
+    depth_units: 0.001
+    depth_roi_scale: 0.5
+    inference_rate_hz: 5.0
+    input_timeout_sec: 1.0
+    rgb_depth_sync_tolerance_sec: 0.20
+    # The dock's RealSense streams use independent device clocks. Pair the
+    # already-aligned depth frame by local receipt time instead of header time.
+    rgb_depth_sync_use_receive_time: true
+    # Initial estimate only; calibrate before trusting map coordinates.
+    camera_to_base_x: 0.15
+    camera_to_base_y: 0.0
+    camera_to_base_z: 0.42
+    camera_roll_offset_deg: 0.0
+    camera_pitch_offset_deg: 0.0
+    camera_yaw_offset_deg: 0.0

@@ -1,0 +1,31 @@
+camera:
+  source: realsense_d435i
+  color_topic: /camera/color/image_raw
+  camera_info_topic: /camera/color/camera_info
+  depth_topic: /camera/aligned_depth_to_color/image_raw
+  # RealSense 默认深度为 16UC1 毫米，depth_units 取 0.001；
+  # 如果驱动输出 32FC1 米制深度，则改为 1.0。
+  depth_units: 0.001
+  depth_roi_scale: 0.5
+  frame_id: camera_color_optical_frame
+  target_frame: slam_map
+
+extrinsics:
+  # 相机安装在头部前置相机上方约 5 cm。
+  # 以下为估算初始值，真机部署前需要按实际安装位置重新标定。
+  camera_to_base_x: 0.15
+  camera_to_base_y: 0.0
+  camera_to_base_z: 0.42
+  roll_deg: 0.0
+  pitch_deg: 0.0   # 正值表示光轴向下俯视
+  yaw_deg: 0.0
+
+estimator:
+  min_distance_m: 0.15
+  max_distance_m: 6.0
+  grasp_range_m: 0.45
+  min_confidence: 0.25
+
+target:
+  class_names:
+    - science_target

@@ -1,0 +1,123 @@
+schema_version: 1
+
+# Canonical ARX X5 fixed-pose template configuration for the Week 2 MuJoCo
+# prototype. Values tagged "original_material" were copied from the supplied
+# ARX documentation or x5.urdf. Values tagged "engineering_assumption" must be
+# tuned after the Go2 mount, storage-bin position, target pose, and collision
+# geometry are fixed.
+arm:
+  model: ARX_X5
+  arm_joint_count: 6
+  command_topic: arm_cmd
+  status_topic: arm_status
+  command_units:
+    translation: m
+    rotation: rad
+    joint_position: rad
+
+  modes:
+    torque_zero: 0
+    go_home: 1
+    damping: 2
+    gravity_compensation: 3
+    end_pose_control: 4
+    joint_position_control: 5
+
+  joints:
+    - {name: joint1, parent: base_link, child: link1, axis: [0.0, 0.0, 1.0], origin_xyz: [0.0, 0.0, 0.0603], origin_rpy: [0.0, 0.0, 0.0], lower: -3.14, upper: 2.60}
+    - {name: joint2, parent: link1, child: link2, axis: [0.0, 1.0, 0.0], origin_xyz: [0.02, 0.0, 0.0402], origin_rpy: [0.0, 0.0, 0.0], lower: -3.60, upper: 0.10}
+    - {name: joint3, parent: link2, child: link3, axis: [0.0, 1.0, 0.0], origin_xyz: [-0.264, 0.0, 0.0], origin_rpy: [-3.1416, 0.0, 0.0], lower: -1.57, upper: 1.57}
+    - {name: joint4, parent: link3, child: link4, axis: [0.0, 1.0, 0.0], origin_xyz: [0.245, 0.0, -0.056], origin_rpy: [0.0, 0.0, 0.0], lower: -1.30, upper: 1.30}
+    - {name: joint5, parent: link4, child: link5, axis: [0.0, 0.0, 1.0], origin_xyz: [0.06575, -0.001, -0.0825], origin_rpy: [0.0, 0.0, 0.0], lower: -1.57, upper: 1.57}
+    - {name: joint6, parent: link5, child: link6, axis: [1.0, 0.0, 0.0], origin_xyz: [0.02845, 0.0, 0.0825], origin_rpy: [-3.1416, 0.0, 0.0], lower: -2.10, upper: 2.10}
+
+  gripper:
+    command_closed: 0.0
+    command_open: 5.0
+    opening_closed_m: 0.0
+    opening_open_m: 0.08
+
+  initial_pose:
+    sdk_home_mode: 1
+    sdk_home_joint_pos: null
+    simulation_home_joint_pos: [0.0, -0.80, 1.20, 0.0, 0.60, 0.0]
+    note: >-
+      The SDK defines mode 1 as return to its internal initial pose but does not
+      publish the factory home joint vector. The simulation vector is inherited
+      from the repository placeholder and remains an engineering assumption.
+
+mujoco:
+  body_fragment: mjcf/arx_x5_body.xml
+  actuator_fragment: mjcf/arx_x5_actuators.xml
+  standalone_model: mjcf/arx_x5_simplified.xml
+  actuator_names:
+    - arx_x5_joint1_position
+    - arx_x5_joint2_position
+    - arx_x5_joint3_position
+    - arx_x5_joint4_position
+    - arx_x5_joint5_position
+    - arx_x5_joint6_position
+    - arx_x5_gripper_position
+
+sequence: [home, pre_grasp, grasp, lift, drop_to_bin]
+
+templates:
+  home:
+    mode: 5
+    joint_pos: [0.0, -0.80, 1.20, 0.0, 0.60, 0.0]
+    gripper: 5.0
+    gripper_timing: before_motion
+    gripper_duration_s: 0.45
+    duration_s: 2.0
+    source_classification: engineering_assumption
+    description: Safe folded pose used by the Week 2 simulation.
+
+  pre_grasp:
+    mode: 5
+    joint_pos: [0.0, -1.05, 0.95, 0.0, 0.35, 0.0]
+    gripper: 5.0
+    gripper_timing: before_motion
+    gripper_duration_s: 0.45
+    duration_s: 1.5
+    source_classification: engineering_assumption
+    description: Open gripper and move to the fixed approach pose.
+
+  grasp:
+    mode: 5
+    joint_pos: [0.0, -1.20, 0.75, 0.0, 0.65, 0.0]
+    gripper: 0.0
+    gripper_timing: after_motion
+    gripper_duration_s: 0.55
+    duration_s: 1.0
+    source_classification: engineering_assumption
+    description: Move to the fixed pickup pose, then close the gripper.
+
+  lift:
+    mode: 5
+    joint_pos: [0.0, -0.80, 1.20, 0.0, 0.50, 0.0]
+    gripper: 0.0
+    gripper_timing: before_motion
+    gripper_duration_s: 0.45
+    duration_s: 1.5
+    source_classification: engineering_assumption
+    description: Keep the gripper closed and retract upward.
+
+  drop_to_bin:
+    mode: 5
+    joint_pos: [-1.20, -0.80, 1.20, 0.0, 0.65, 0.0]
+    gripper: 5.0
+    gripper_timing: after_motion
+    gripper_duration_s: 0.55
+    duration_s: 2.5
+    source_classification: engineering_assumption
+    description: Rotate toward the assumed bin position, then open the gripper.
+
+provenance:
+  control_semantics: original_material
+  joint_names_origins_axes_and_link_masses: original_material
+  joint_limits: original_material_ros2_manual
+  gripper_command_and_opening_range: original_material_ros2_manual
+  factory_home_joint_vector: not_disclosed
+  fixed_action_joint_targets: engineering_assumption
+  action_durations: engineering_assumption
+  mujoco_geometry_and_gains: engineering_assumption

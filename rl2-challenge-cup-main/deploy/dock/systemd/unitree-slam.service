@@ -1,0 +1,18 @@
+[Unit]
+Description=Unitree SLAM service
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+User=unitree
+Group=unitree
+WorkingDirectory=/unitree/module/unitree_slam/bin
+Environment=LD_LIBRARY_PATH=/home/unitree/cyclonedds_ws/install/cyclonedds/lib:/usr/local/lib
+ExecStart=/unitree/module/unitree_slam/bin/unitree_slam
+Restart=on-failure
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target
+

@@ -1,0 +1,14 @@
+[Unit]
+Description=RL2 storage-box ROS bridge (startup does not move servo)
+After=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=@PROJECT_ROOT@
+Environment=ROS_LOG_DIR=/tmp/rl2_storage_box_bridge/ros
+ExecStart=/bin/bash -lc 'mkdir -p "$ROS_LOG_DIR"; set +u; source @UNITREE_SETUP@; source @PROJECT_ROOT@/install/setup.bash; set -u; exec python3 @PROJECT_ROOT@/scripts/storage_box_ros_bridge.py'
+Restart=on-failure
+RestartSec=2
+
+[Install]
+WantedBy=default.target

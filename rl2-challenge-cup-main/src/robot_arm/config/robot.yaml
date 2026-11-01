@@ -1,0 +1,20 @@
+schema_version: 1
+
+model: ARX_X5
+base_frame: arm_base
+tcp_frame: tcp
+
+kinematics:
+  tcp_offset_xyz_m: [0.045, 0.0, 0.0]
+  base_correction_xyz_m: [-0.0006, -0.0019, 0.00225]
+
+joints:
+  # IK 限位对齐 ARX5 SDK 默认范围（j3 上限保留 270° 以支持倒置姿态实验）
+  - {name: joint1, axis: [0.0, 0.0, 1.0], origin_xyz_m: [0.0, 0.0, 0.0603], origin_rpy_rad: [0.0, 0.0, 0.0], limits_rad: [-3.14, 2.618]}
+  - {name: joint2, axis: [0.0, 1.0, 0.0], origin_xyz_m: [0.02, 0.0, 0.0402], origin_rpy_rad: [0.0, 0.0, 0.0], limits_rad: [-0.174533, 3.577925]}  # -10° .. 205°
+  # 270 deg = 4.71238898 rad.  This is a software limit for the inverted-pose
+  # experiment; verify the mechanical stop and SDK support before real motion.
+  - {name: joint3, axis: [0.0, 1.0, 0.0], origin_xyz_m: [-0.264, 0.0, 0.0], origin_rpy_rad: [-3.1416, 0.0, 0.0], limits_rad: [-1.57, 4.712389]}
+  - {name: joint4, axis: [0.0, 1.0, 0.0], origin_xyz_m: [0.245, 0.0, -0.056], origin_rpy_rad: [0.0, 0.0, 0.0], limits_rad: [-1.7453, 1.7453]}
+  - {name: joint5, axis: [0.0, 0.0, 1.0], origin_xyz_m: [0.06575, -0.001, -0.0825], origin_rpy_rad: [0.0, 0.0, 0.0], limits_rad: [-1.7453, 1.7453]}
+  - {name: joint6, axis: [1.0, 0.0, 0.0], origin_xyz_m: [0.02845, 0.0, 0.0825], origin_rpy_rad: [-3.1416, 0.0, 0.0], limits_rad: [-2.0, 2.0]}

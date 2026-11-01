@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Static-base ARX X5 contact-grasp test scene.
+
+  The target is a dynamic free body. The runner may initialize arm joints, but
+  it must never rewrite the target freejoint after simulation starts.
+  Target dimensions and mass are temporary engineering assumptions until one
+  representative fake rock is measured.
+-->
+<mujoco model="arx_x5_real_contact_grasp">
+  <include file="../robot/arx_x5_assets.xml"/>
+  <compiler angle="radian" autolimits="false"/>
+  <option timestep="0.002" gravity="0 0 -1.62" integrator="implicitfast"
+          solver="Newton" iterations="80" ls_iterations="20"
+          noslip_iterations="10"/>
+
+  <visual>
+    <headlight ambient="0.35 0.35 0.35" diffuse="0.75 0.75 0.75"/>
+    <rgba haze="0.08 0.08 0.10 1"/>
+  </visual>
+
+  <default>
+    <geom friction="0.8 0.02 0.002" condim="4"/>
+  </default>
+
+  <asset>
+    <material name="target_rock" rgba="0.30 0.31 0.32 1"/>
+    <material name="support" rgba="0.48 0.50 0.52 0.45"/>
+  </asset>
+
+  <worldbody>
+    <light pos="0 -1.5 2.5" dir="0 0 -1" directional="true"/>
+    <geom name="contact_test_floor" type="plane" size="2 2 0.05"
+          rgba="0.24 0.23 0.22 1" contype="1" conaffinity="1"/>
+
+    <body name="contact_test_stand" pos="0 0 0.015">
+      <geom name="contact_test_mounting_plate" type="box" size="0.12 0.08 0.015"
+            mass="8" rgba="0.12 0.14 0.17 1"/>
+      <include file="../robot/arx_x5_body.xml"/>
+    </body>
+
+    <!-- Coordinates are placeholders only. SceneObjectInitializer overwrites
+         them from contact_scene.yaml before the first simulation step. -->
+    <body name="contact_target_support_body" pos="0.30 0 0.1523">
+      <geom name="contact_target_support" type="cylinder"
+            size="0.012 0.1523" material="support"
+            contype="1" conaffinity="1"/>
+    </body>
+    <site name="contact_target_spawn" pos="0.30 0 0.3196"
+          type="box" size="0.025 0.025 0.015" rgba="0.15 0.75 0.95 0.30"/>
+
+    <body name="contact_target" pos="0.30 0 0.3196">
+      <freejoint name="contact_target_freejoint"/>
+      <geom name="contact_target_geom" type="box" size="0.025 0.025 0.015"
+            mass="0.005" material="target_rock" friction="1.0 0.02 0.002"
+            condim="4" contype="2" conaffinity="1"/>
+    </body>
+
+    <!-- Axis-aligned storage placeholder positioned below the fixed
+         drop_to_bin pose. The 116 x 112 mm clear top opening comes from the
+         current storage handoff and remains an engineering assumption. -->
+    <body name="storage_bin_placeholder" pos="0.25 0.30 0">
+      <geom name="storage_bin_bottom" type="box" pos="0 0 0.145"
+            size="0.063 0.061 0.005" rgba="0.16 0.20 0.24 1"
+            contype="1" conaffinity="2" friction="0.8 0.02 0.002"/>
+      <geom name="storage_bin_wall_x_pos" type="box" pos="0.063 0 0.210"
+            size="0.005 0.061 0.060" rgba="0.24 0.30 0.36 0.75"
+            contype="1" conaffinity="2" friction="0.8 0.02 0.002"/>
+      <geom name="storage_bin_wall_x_neg" type="box" pos="-0.063 0 0.210"
+            size="0.005 0.061 0.060" rgba="0.24 0.30 0.36 0.75"
+            contype="1" conaffinity="2" friction="0.8 0.02 0.002"/>
+      <geom name="storage_bin_wall_y_pos" type="box" pos="0 0.061 0.210"
+            size="0.058 0.005 0.060" rgba="0.24 0.30 0.36 0.75"
+            contype="1" conaffinity="2" friction="0.8 0.02 0.002"/>
+      <geom name="storage_bin_wall_y_neg" type="box" pos="0 -0.061 0.210"
+            size="0.058 0.005 0.060" rgba="0.24 0.30 0.36 0.75"
+            contype="1" conaffinity="2" friction="0.8 0.02 0.002"/>
+      <site name="storage_entry_site" type="box" pos="0 0 0.270"
+            size="0.058 0.056 0.004" rgba="0.15 0.85 0.35 0.25"/>
+      <site name="storage_hold_region" type="box" pos="0 0 0.205"
+            size="0.058 0.056 0.055" rgba="0.95 0.65 0.10 0.12"/>
+    </body>
+  </worldbody>
+
+  <actuator>
+    <include file="../robot/arx_x5_actuators.xml"/>
+  </actuator>
+
+  <equality>
+    <include file="../robot/arx_x5_equalities.xml"/>
+  </equality>
+</mujoco>

@@ -1,0 +1,7 @@
+cmake_minimum_required(VERSION 3.16)
+project(b2w_sensor_tools LANGUAGES CXX)
+set(CMAKE_CXX_STANDARD 17)
+set(BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
+add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/../../unitree_sdk2" "${CMAKE_BINARY_DIR}/sdk")
+add_executable(capture_builtin capture_builtin.cpp)
+target_link_libraries(capture_builtin unitree_sdk2)

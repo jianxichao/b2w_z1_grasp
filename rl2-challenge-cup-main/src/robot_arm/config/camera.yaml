@@ -1,0 +1,23 @@
+schema_version: 1
+
+camera:
+  model: Orbbec Gemini 2
+  # The dock enumerates Gemini 2 at USB2.  These profiles remained stable
+  # while 1280 RGB-D eventually lost alignment frames.
+  width: 640
+  height: 360
+  # D435i and Gemini 2 share the dock's USB2 hub during integrated missions.
+  # The detector consumes only ~2 Hz, so 15 Hz preserves responsiveness while
+  # avoiding RGB-D alignment loss caused by the previous 30 Hz reservation.
+  fps: 15
+  depth_width: 640
+  depth_height: 400
+  calibration_width: 1280
+  calibration_height: 720
+  min_depth_m: 0.02
+  max_depth_m: 10.0
+
+display:
+  enabled: true
+  continuous_tracking: true
+  show_depth: true

@@ -1,0 +1,8 @@
+geometry_msgs/PoseStamped target_pose
+string target_id
+---
+bool success
+string message
+---
+string stage
+float32 progress

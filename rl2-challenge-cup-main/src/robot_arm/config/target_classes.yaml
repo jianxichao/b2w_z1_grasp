@@ -1,0 +1,26 @@
+schema_version: 1
+
+model:
+  # ONNX keeps the dock runtime small; the exported model has a fixed 640 input.
+  weights: models/yolo/best.onnx
+  confidence: 0.35
+  device: auto
+  tracker: bytetrack.yaml
+  image_size: 640
+
+target_classes:
+  - rock_obstacle
+
+# 此映射仅在 dry-run 生效；real 模式开启它时会拒绝启动。
+demo_mapping:
+  enabled: false
+  class_map:
+    bottle: rock_obstacle
+    cup: rock_obstacle
+
+event_policy:
+  target_class: rock_obstacle
+  acquire_confidence: 0.50
+  seen_confirm_frames: 3
+  max_position_spread_m: 0.015
+  lock_timeout_s: 10.0

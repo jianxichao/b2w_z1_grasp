@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CycloneDDS>
+  <Domain Id="any">
+    <General>
+      <!-- Foxy's bundled CycloneDDS predates the <Interfaces> syntax. -->
+      <NetworkInterfaceAddress>eth10</NetworkInterfaceAddress>
+      <AllowMulticast>spdp</AllowMulticast>
+    </General>
+  </Domain>
+</CycloneDDS>

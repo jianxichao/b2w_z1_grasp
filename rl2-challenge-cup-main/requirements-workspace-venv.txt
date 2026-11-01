@@ -1,0 +1,14 @@
+# Packages installed directly in the workspace .venv on 2026-08-12.
+# torch/torchvision come from https://download.pytorch.org/whl/cpu.
+setuptools==79.0.1
+torch==2.13.0+cpu
+torchvision==0.28.0+cpu
+ultralytics==8.4.118
+ultralytics-thop==2.1.6
+lap==0.5.13
+polars==1.43.2
+nvidia-ml-py==13.610.43
+
+# Inherited through --system-site-packages instead of duplicated in .venv:
+# numpy==1.26.4, onnxruntime==1.23.2, pyorbbecsdk2==2.1.1,
+# PyYAML==5.4.1, OpenCV==4.5.4, ROS 2 Humble Python packages.

@@ -1,0 +1,28 @@
+# OS / editor
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# ROS / build artifacts
+**/build/
+**/install/
+**/log/
+**/output/
+**/.runtime/
+**/.pytest_cache/
+**/__pycache__/
+
+# generic compiled files
+*.so
+*.a
+*.o
+*.dylib
+unitree_sdk2/
+unitree_z1/
+**/.git/
+**/.git

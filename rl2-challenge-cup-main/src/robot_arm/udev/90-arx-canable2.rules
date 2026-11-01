@@ -1,0 +1,3 @@
+# ARX X5 CANable2 (16d0:117e, USB serial 208B336C5931).
+# Keep the USB serial device stable even if its ttyACM number changes.
+SUBSYSTEM=="tty", KERNEL=="ttyACM*", ATTRS{idVendor}=="16d0", ATTRS{idProduct}=="117e", ATTRS{serial}=="208B336C5931", SYMLINK+="arxcan1", GROUP:="dialout", MODE:="0660"

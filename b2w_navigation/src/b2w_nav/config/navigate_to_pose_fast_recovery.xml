@@ -1,0 +1,46 @@
+<!--
+  Fast recovery behavior tree for frontier exploration.
+
+  目标：尽量不让机器人完全静止。绝大多数"卡一下"都是局部小问题(costmap里
+  一小块噪声障碍、路径暂时不最优)，不需要真的停下来做Spin/Wait这套
+  完整恢复流程；先靠"清costmap+重试"这种不停止的方式自己恢复，只有真正连
+  续失败很多次才升级到会让机器人短暂停下的恢复动作。
+
+  Differences from default nav2 tree:
+  1. 建图期间保留周期重规划，但降到1Hz，避免每秒3次向控制器替换路径。
+  2. ComputePathToPose/FollowPath失败后各清一次costmap并重试；仍失败就快速
+     返回给Frontier节点换目标，不在同一不可达目标上长期停留。
+  2. Wait完全去掉——它是纯粹的"发呆"，机器人0速度傻等，对脱困没有任何直接
+     帮助，是"走走停停"里最没有意义的停顿来源。
+  3. 移除Spin/BackUp恢复。规划器已经确认无路时，原地旋转既不会让目标变得
+     可达，又会造成约10秒停车；Frontier黑名单换点更合适。
+-->
+<root main_tree_to_execute="MainTree">
+  <BehaviorTree ID="MainTree">
+    <!-- Keep the action alive while the safety gate executes a bounded
+         lethal-start escape.  Three fast clear/replan attempts take much less
+         time than the former Spin/Wait recovery but avoid aborting the RViz
+         goal before the robot has left its lethal start cell. -->
+    <RecoveryNode number_of_retries="3" name="NavigateRecovery">
+      <PipelineSequence name="NavigateWithReplanning">
+        <RateController hz="1.0">
+          <RecoveryNode number_of_retries="1" name="ComputePathToPose">
+            <ComputePathToPose goal="{goal}" path="{path}" planner_id="GridBased"/>
+            <ClearEntireCostmap name="ClearGlobalCostmap-Context" service_name="global_costmap/clear_entirely_global_costmap"/>
+          </RecoveryNode>
+        </RateController>
+        <RecoveryNode number_of_retries="1" name="FollowPath">
+          <FollowPath path="{path}" controller_id="FollowPath"/>
+          <ClearEntireCostmap name="ClearLocalCostmap-Context" service_name="local_costmap/clear_entirely_local_costmap"/>
+        </RecoveryNode>
+      </PipelineSequence>
+      <ReactiveFallback name="RecoveryFallback">
+        <GoalUpdated/>
+        <SequenceStar name="RecoveryActions">
+          <ClearEntireCostmap name="ClearGlobalCostmap-Recovery" service_name="global_costmap/clear_entirely_global_costmap"/>
+          <ClearEntireCostmap name="ClearLocalCostmap-Recovery" service_name="local_costmap/clear_entirely_local_costmap"/>
+        </SequenceStar>
+      </ReactiveFallback>
+    </RecoveryNode>
+  </BehaviorTree>
+</root>

@@ -1,0 +1,33 @@
+b2w_sport_cmd_bridge:
+  ros__parameters:
+    input_topic: /cmd_vel_sport
+    request_topic: /api/sport/request
+    response_topic: /api/sport/response
+    sport_state_topic: /lf/sportmodestate
+    status_topic: /b2w_sport_cmd_bridge/status
+    publish_rate_hz: 10.0
+    input_timeout_sec: 0.30
+    sport_state_timeout_sec: 0.50
+    max_linear_x: 0.15
+    max_linear_y: 0.0
+    max_angular_z: 0.20
+    allow_reverse: false
+    zero_epsilon: 0.001
+    stop_heartbeat_sec: 0.50
+    stop_repeat_count: 3
+    stand_down_exclusive_sec: 3.0
+    stand_up_exclusive_sec: 4.0
+    balance_stand_exclusive_sec: 2.0
+    enabled_on_start: false
+    # Software local-goal controller: m/s, rad/s, m/s^2, rad/s^2.
+    local_goal_linear_speed: 0.30
+    local_goal_angular_speed: 0.30
+    local_goal_linear_accel: 0.30
+    local_goal_angular_accel: 0.40
+    # Signed feedforward before speed/acceleration limits. Stop remains zero.
+    local_goal_linear_bias: 0.20  # m/s
+    local_goal_angular_bias: 0.20 # rad/s
+    local_goal_position_tolerance: 0.25 # m
+    local_goal_yaw_tolerance: 0.10 # rad, about 6 degrees
+    local_goal_longitudinal_tolerance: 0.06 # m; align alongside before stopping
+    local_goal_stand_down_on_arrival: true

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mujoco model="arx_x5_simplified_week2">
+  <compiler angle="radian" autolimits="false"/>
+  <option timestep="0.002" gravity="0 0 -1.62" integrator="implicitfast"/>
+
+  <visual>
+    <headlight ambient="0.35 0.35 0.35" diffuse="0.75 0.75 0.75"/>
+    <rgba haze="0.08 0.08 0.10 1"/>
+  </visual>
+
+  <default>
+    <default class="arx_x5_visual">
+      <geom contype="1" conaffinity="1" friction="0.8 0.02 0.002"/>
+    </default>
+  </default>
+
+  <worldbody>
+    <light pos="0 -1.5 2.5" dir="0 0 -1" directional="true"/>
+    <geom name="floor" type="plane" size="2 2 0.05" rgba="0.32 0.31 0.30 1"/>
+    <body name="stand" pos="0 0 0.015">
+      <!-- Thin engineering mount: the Go2 back plate position is set by assembly. -->
+      <geom name="arx_x5_mounting_plate" type="box" size="0.12 0.08 0.015"
+            mass="8" rgba="0.12 0.14 0.17 1"/>
+      <include file="arx_x5_body.xml"/>
+    </body>
+  </worldbody>
+
+  <actuator>
+    <include file="arx_x5_actuators.xml"/>
+  </actuator>
+
+  <keyframe>
+    <key name="home" qpos="0 -0.80 1.20 0 0.60 0 0.08"
+         ctrl="0 -0.80 1.20 0 0.60 0 0.08"/>
+  </keyframe>
+</mujoco>

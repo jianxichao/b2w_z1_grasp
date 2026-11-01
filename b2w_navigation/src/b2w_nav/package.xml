@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>b2w_nav</name>
+  <version>0.1.0</version>
+  <description>Nav2 frontier exploration and safety control for the Unitree B2W.</description>
+  <maintainer email="0305pkj@sjtu.edu.cn">RL2 Challenge Cup Team</maintainer>
+  <license>MIT</license>
+
+  <buildtool_depend>ament_python</buildtool_depend>
+  <depend>rclpy</depend>
+  <depend>rcl_interfaces</depend>
+  <depend>builtin_interfaces</depend>
+  <depend>geometry_msgs</depend>
+  <depend>nav_msgs</depend>
+  <depend>sensor_msgs</depend>
+  <depend>std_msgs</depend>
+  <depend>std_srvs</depend>
+  <depend>action_msgs</depend>
+  <depend>nav2_msgs</depend>
+  <depend>tf2_ros</depend>
+  <depend>visualization_msgs</depend>
+  <depend>b2w_interfaces</depend>
+  <depend>b2w_hardware</depend>
+  <depend>unitree_go</depend>
+  <exec_depend>launch</exec_depend>
+  <exec_depend>launch_ros</exec_depend>
+  <exec_depend>nav2_bringup</exec_depend>
+  <exec_depend>pointcloud_to_laserscan</exec_depend>
+  <exec_depend>rviz2</exec_depend>
+  <exec_depend>slam_toolbox</exec_depend>
+
+  <export>
+    <build_type>ament_python</build_type>
+  </export>
+</package>

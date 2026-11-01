@@ -1,0 +1,35 @@
+{
+  "device": "Intel RealSense D435i",
+  "serial": "244222076021",
+  "depth_scale_m": 0.0010000000474974513,
+  "resolution": [
+    640,
+    480
+  ],
+  "requested_fps": 15,
+  "frames_received": 45,
+  "elapsed_s": 3.654,
+  "depth_fps_from_timestamps": 13.81,
+  "valid_depth_percent": 79.01,
+  "center_depth_m": 0.0,
+  "depth_percentiles_m": [
+    0.7330000348156318,
+    3.2010001520393416,
+    9.604000456165522
+  ],
+  "intrinsics": {
+    "fx": 384.6622314453125,
+    "fy": 384.6622314453125,
+    "ppx": 321.8623046875,
+    "ppy": 237.38510131835938,
+    "model": "distortion.brown_conrady",
+    "coeffs": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  "note": "Depth is native unaligned Z16; meters = raw * depth_scale_m. Color and depth pixels are not registered."
+}

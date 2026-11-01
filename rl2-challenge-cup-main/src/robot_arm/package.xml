@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>robot_arm</name>
+  <version>0.1.0</version>
+  <description>ARX X5 仿真、真机、视觉和抓取功能库。</description>
+  <maintainer email="robot-arm-team@users.noreply.github.com">Robot Arm Team</maintainer>
+  <license>MIT</license>
+  <buildtool_depend>ament_python</buildtool_depend>
+  <exec_depend>ament_index_python</exec_depend>
+  <exec_depend>python3-numpy</exec_depend>
+  <exec_depend>python3-yaml</exec_depend>
+  <export>
+    <build_type>ament_python</build_type>
+  </export>
+</package>
